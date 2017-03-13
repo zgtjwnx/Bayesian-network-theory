@@ -1,5 +1,6 @@
 package bayesian;
 
+import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 
@@ -8,12 +9,7 @@ import org.tc33.jheatchart.HeatChart;
 public class Main {
 	public static void main(String[] args) throws IOException {
 		Calculate test = new Calculate();
-		Map map = new Map(160, 120);
-		map.generate_file();
-		map.print_file();
-		map.generate_startpoint();
-		map.action_run(100);
-		map.display();
+		
 		test.action_2(2, 1);
 		test.display_prob();
 
@@ -27,7 +23,12 @@ public class Main {
 		test.display_prob();
 
 		test = new Calculate(120, 160);
-
+		Map map = new Map(160, 120);
+		map.generate_file();
+		map.print_file();
+		map.generate_startpoint();
+		map.action_run(100);
+		map.display();
 		int count = 120 * 160;
 		for (int i = 1; i < 122 - 1; i++) {
 			for (int j = 1; j < 162 - 1; j++) {
@@ -98,8 +99,10 @@ public class Main {
 //		distance /= 80;
 //		System.out.println(distance);
 		HeatChart map_1 = new HeatChart(test.prob);
+		map_1.setBackgroundColour(Color.LIGHT_GRAY);
+		map_1.setColourScale(0.1);
+		map_1.setHighValueColour(Color.RED);
+		map_1.setLowValueColour(Color.YELLOW);
 		map_1.saveToFile(new File("java-heat-chart.png"));
-
 	}
-
 }
